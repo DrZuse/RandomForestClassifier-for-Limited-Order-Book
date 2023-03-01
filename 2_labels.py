@@ -150,19 +150,21 @@ def labels(bp, df):
     nozero_arr = profit_arr[:, 0][np.nonzero(profit_arr[:, 0])]
     long_profit_prcnt = st.scoreatpercentile(nozero_arr, 50) # Вычисляем 50й персентиль профита лонг
     logger.info(f'50 percentile of all LONG profits: {long_profit_prcnt}%')
+    logger.info(f'long profit by percentile > 50: {np.where(profit_arr[:, 0]>long_profit_prcnt, 1, 0).sum()}')
     #short_profit_prcnt = st.scoreatpercentile(profit_arr[:, 1], 50) # Вычисляем 50й персентиль профита шорт
     logger.info(f'max LONG profit: {profit_arr[:, 0].max()}%')
-    profit_arr[:, 0][np.where(profit_arr[:, 0]>0.01)]
-    logger.info(f'LONG profits > 0.01%: {profit_arr[:, 0][np.where(profit_arr[:, 0]>0.01)].shape} shape')
-    logger.info(f'min LONG profit: {profit_arr[:, 0].min()}%')
+    profit_wanted = 0.01 # 0.01%
+    logger.info(f'LONG profits > {profit_wanted}%: {profit_arr[:, 0][np.where(profit_arr[:, 0]>profit_wanted)].shape} shape')
+
 
 
     #logger.info(f'50 percentile of all SHORT profits: {short_profit_prcnt}%')
 
     #best_direction_arr = np.where(profit_arr[:, 0]>long_profit_prcnt, 1, np.where(profit_arr[:, 1]>short_profit_prcnt, -1, 0)).reshape(-1, 1)
-    best_direction_arr = np.where(profit_arr[:, 0]>long_profit_prcnt, 1, 0).reshape(-1, 1)
+    #best_direction_arr = np.where(profit_arr[:, 0]>long_profit_prcnt, 1, 0).reshape(-1, 1)
+    best_direction_arr = np.where(profit_arr[:, 0]>profit_wanted, 1, 0).reshape(-1, 1)
 
-    logger.info(f'long profit by percentile > 50: {np.where(profit_arr[:, 0]>long_profit_prcnt, 1, 0).sum()}')
+    
 
     logger.info(f'best_direction_arr.shape: {best_direction_arr.shape}')
     logger.info(f'profit_arr.shape: {profit_arr.shape}')

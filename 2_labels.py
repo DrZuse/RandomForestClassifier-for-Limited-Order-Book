@@ -58,8 +58,8 @@ logger.info('finish read csvs')
 @numba.njit(parallel=True)
 def ttp(f_array, lookahead_window):
 
-    # 0 - long profit, 1 - short profit
-    profit_arr = np.zeros((f_array.shape[0], 2), dtype=np.float64)
+    # profit_arr[0] - long profit
+    profit_arr = np.zeros((f_array.shape[0], 1), dtype=np.float64)
 
     for open_tick in numba.prange(f_array.shape[0]):
         #if open_tick % 100000 == 0:
@@ -130,7 +130,7 @@ def labels(bp, df):
     logger.info(profit_arr[:10])
     logger.info(profit_arr.shape)
     logger.info(f'profit_arr: {profit_arr[:, 0][np.nonzero(profit_arr[:, 0])][:10]} nozero')
-    logger.info(f'profit_arr: {profit_arr[:, 0][np.nonzero(profit_arr[:, 0])].shape} shape')
+    logger.info(f'profit_arr: {profit_arr[:, 0][np.nonzero(profit_arr[:, 0])].shape} nozero shape')
 
 
     '''

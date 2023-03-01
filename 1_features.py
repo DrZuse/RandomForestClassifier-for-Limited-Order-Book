@@ -43,6 +43,12 @@ colums_list = [2, *range(4, start_cols_num+nlevels*4)]
 
 logger.info('start read LOB csvs')
 lob_file = pd.read_csv(directory_of_the_script+csv_path, usecols=colums_list)
+logger.info(lob_file[:10])
+
+columns_titles = ['timestamp', 'ask_price', 'ask_amount', 'bid_price', 'bid_amount'] # to make it like 'book_snapshot' csv
+lob_file = lob_file.reindex(columns = columns_titles)
+logger.info(lob_file[:10])
+
 logger.info('finish read LOB csvs')
 
 data_arr_timestamp = lob_file['timestamp'].values.reshape(len(lob_file), 1)

@@ -184,6 +184,8 @@ big_arr[:, start:end] = asks_0_price
 # =============================================================================
 logger.info('сохраняем в CSV')
 
+os.makedirs(data_features, exist_ok=True)
+
 theName = csv_name[:-4] + f'_X_lb{lookback_window}_lev{nlevels}.csv'
-np.savetxt(directory_of_the_script+data_features+theName, big_arr[lookback_window:-lookahead_window], delimiter=',', fmt='%d')
+np.savetxt(directory_of_the_script+'/'+data_features+theName, big_arr[lookback_window:-lookahead_window], delimiter=',', fmt='%d')
 logger.info('finish')

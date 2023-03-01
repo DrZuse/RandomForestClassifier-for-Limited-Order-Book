@@ -1,3 +1,4 @@
 api.py
 logs
 __pycache__
+*.csv

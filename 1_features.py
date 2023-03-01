@@ -43,11 +43,11 @@ colums_list = [2, *range(4, start_cols_num+nlevels*4)]
 
 logger.info('start read LOB csvs')
 lob_file = pd.read_csv(directory_of_the_script+csv_path, usecols=colums_list)
-logger.info(lob_file[:10])
+#logger.info(lob_file[:10])
 
 columns_titles = ['timestamp', 'ask_price', 'ask_amount', 'bid_price', 'bid_amount'] # to make it like 'book_snapshot' csv
 lob_file = lob_file.reindex(columns = columns_titles)
-logger.info(lob_file[:10])
+#logger.info(lob_file[:10])
 
 logger.info('finish read LOB csvs')
 
@@ -93,10 +93,10 @@ volumeDer = np.array(volumeDer).T
 logger.info(f'volumeDer.shape: {volumeDer.shape}')
 
 
-#----- Price differences
-AskPriceDiff = features.ask_price_diff(data_arr, nlevels, lookback_window)
-AskPriceDiff = np.concatenate(AskPriceDiff, axis=1)
-logger.info(f'AskPriceDiff.shape: {AskPriceDiff.shape}')
+#----- Price differences # if 1 level only : ValueError: need at least one array to concatenate
+#AskPriceDiff = features.ask_price_diff(data_arr, nlevels, lookback_window)
+#AskPriceDiff = np.concatenate(AskPriceDiff, axis=1)
+#logger.info(f'AskPriceDiff.shape: {AskPriceDiff.shape}')
 
 
 #----- Mean Price and Volume
@@ -127,7 +127,7 @@ big_arr_width = (
     + midDer.shape[1]
     + spreadDer.shape[1]
     + volumeDer.shape[1]
-    + AskPriceDiff.shape[1]
+    #+ AskPriceDiff.shape[1]
     + mean_price_and_volume.shape[1]
     + acc_price_size_diff.shape[1]
     + asks_0_price.shape[1]
@@ -162,9 +162,9 @@ start = end
 end = end + volumeDer.shape[1]
 big_arr[:, start:end] = volumeDer
 
-start = end
-end = end + AskPriceDiff.shape[1]
-big_arr[:, start:end] = AskPriceDiff
+#start = end
+#end = end + AskPriceDiff.shape[1]
+#big_arr[:, start:end] = AskPriceDiff
 
 start = end
 end = end + mean_price_and_volume.shape[1]

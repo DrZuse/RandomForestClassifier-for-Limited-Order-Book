@@ -33,7 +33,7 @@ directory_of_the_script = os.path.dirname(os.path.abspath(__file__))
 lookahead_window    = basic_parameters['lookahead_window']
 csv_path            = basic_parameters['csv_path']
 drawdown_limit      = basic_parameters['drawdown_limit']
-output_filename = f'_Y{lookahead_window}Ticks.csv'
+
 
 
 # =============================================================================
@@ -95,7 +95,7 @@ def ttp(f_array, lookahead_window):
             if price_move_prcnt_long > max_profit_long:
                 max_profit_long = price_move_prcnt_long
                 profit_arr[open_tick, 0] = np.around(max_profit_long, 10)
-            elif price_move_prcnt_long < drawdown_limit: # go to next open_tick if drawdown is to big
+            elif price_move_prcnt_long < -drawdown_limit: # go to next open_tick if drawdown is to big
                 break
 
             
@@ -177,10 +177,10 @@ def labels(bp, df):
 
 
     #----- сохраняем массив в CSV. При этом исключаем lookback_window и lookahead_window
-    logger.info(f'make {output_filename}')
+    logger.info(f'make CSV')
 
     os.makedirs(directory_of_the_script + '/' + data_features, exist_ok=True) # if not exist makedir for CSV files
-    labels_file = directory_of_the_script + '/' + data_features + bp['csv_name'][:-4] + f'_Y_la{lookahead_window}Ticks.csv'
+    labels_file = directory_of_the_script + '/' + data_features + bp['csv_name'][:-4] + f'_Y_la{lookahead_window}Ticks_lb{lookback_window}.csv'
 
     np.savetxt(labels_file, best_direction_arr[lookback_window:-lookahead_window], delimiter=',', fmt='%d')
 

@@ -23,7 +23,7 @@ splits                  = basic_parameters['splits']
 
 directory_of_the_script = os.path.dirname(os.path.abspath(__file__))
 features_csv = directory_of_the_script + '/' + data_features + csv_name[:-4] + f'_X_lb{lookback_window}_lev{nlevels}.csv'
-labels_csv = directory_of_the_script + '/' + data_features + csv_name[:-4] + f'_Y_la{lookahead_window}Ticks.csv'
+labels_csv = directory_of_the_script + '/' + data_features + csv_name[:-4] + f'_Y_la{lookahead_window}Ticks_lb{lookback_window}.csv'
 
 
 # =============================================================================

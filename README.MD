@@ -25,3 +25,4 @@ The RandomForestClassifier is trained on 80% of the data from LOB. The resulting
 
 ## 4_predict.py
 Prediction is made on the remaining 20% of the data from LOB.
+![alt text](https://github.com/DrZuse/rf-binance_realtime_bookticker_v0.01/blob/master/predict.png?raw=true)

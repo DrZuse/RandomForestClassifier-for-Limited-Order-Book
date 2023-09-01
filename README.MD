@@ -6,7 +6,7 @@ Contains all the necessary settings and the path to the LOB CSV file.
 ## 1_features.py
 Reads the LOB CSV and generates features. It uses the mylibs/features.py library, which, in turn, utilizes multiprocessing to distribute the workload among CPU cores.
 
-## Features include absolute levels and deciles ranking compared to the last [lookback_window] ticks:
+Features include absolute levels and deciles ranking compared to the last [lookback_window] ticks:
 - Imbalance level
 - Derivative per level
 - Spread derivative

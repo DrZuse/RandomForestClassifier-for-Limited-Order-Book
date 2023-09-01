@@ -43,8 +43,8 @@ drawdown_limit      = basic_parameters['drawdown_limit']
 
 logger.info('start read csvs')
 lob_file = directory_of_the_script + csv_path
-#df = pd.read_csv(lob_file, usecols=['timestamp', 'asks[0].price', 'bids[0].price'])
-df = pd.read_csv(lob_file, usecols=['timestamp', 'ask_price', 'bid_price']) # columns names for book_ticker CSV
+df = pd.read_csv(lob_file, usecols=['timestamp', 'asks[0].price', 'bids[0].price'])
+#df = pd.read_csv(lob_file, usecols=['timestamp', 'ask_price', 'bid_price']) # columns names for book_ticker CSV
 logger.info('finish read csvs')
 
 
@@ -111,14 +111,17 @@ def labels(bp, df):
     csv_name                = bp['csv_name']
     lookback_window         = bp['lookback_window']
     data_features           = bp['data_features']
+    profit_wanted           = bp['profit']
 
     logger.info(f'start to extract labels from file: {csv_name}')
 
     
     #logger.info(df)
 
-    df['ask_plus_fee'] = df['ask_price'] + df['ask_price'] * (bp['fee']/100)
-    df['bid_plus_fee'] = df['bid_price'] - df['bid_price'] * (bp['fee']/100)
+    # df['ask_plus_fee'] = df['ask_price'] + df['ask_price'] * (bp['fee']/100)
+    # df['bid_plus_fee'] = df['bid_price'] - df['bid_price'] * (bp['fee']/100)
+    df['ask_plus_fee'] = df['asks[0].price'] + df['asks[0].price'] * (bp['fee']/100)
+    df['bid_plus_fee'] = df['bids[0].price'] - df['bids[0].price'] * (bp['fee']/100)
 
     f_array = df[['ask_plus_fee', 'bid_plus_fee']].to_numpy()
 
@@ -153,7 +156,6 @@ def labels(bp, df):
     logger.info(f'long profit by percentile > 50: {np.where(profit_arr[:, 0]>long_profit_prcnt, 1, 0).sum()}')
     #short_profit_prcnt = st.scoreatpercentile(profit_arr[:, 1], 50) # Вычисляем 50й персентиль профита шорт
     logger.info(f'max LONG profit: {profit_arr[:, 0].max()}%')
-    profit_wanted = 0.01 # 0.01%
     logger.info(f'LONG profits > {profit_wanted}%: {profit_arr[:, 0][np.where(profit_arr[:, 0]>profit_wanted)].shape} shape')
 
 

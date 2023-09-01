@@ -8,21 +8,22 @@ import os
 
 basic_parameters = dict()
 basic_parameters['path_to_full_csvs']       = '/../big_dataframes/tardis/'
-basic_parameters['exchange']                = 'binance'
+basic_parameters['exchange']                = 'bybit'
 basic_parameters['market']                  = 'spot' # spot, futures
-#basic_parameters['csv_name']                = 'binance_book_snapshot_25_2023-02-01_BTCUSDT.csv'
-basic_parameters['csv_name']                = 'binance_book_ticker_2023-02-01_BTCUSDT.csv'
+basic_parameters['csv_name']                = 'bybit_book_snapshot_25_2021-07-01_BTCUSDT.csv'
+#basic_parameters['csv_name']                = 'binance_book_ticker_2023-02-01_BTCUSDT.csv'
 basic_parameters['ticker']                  = 'BTCUSDT'
 basic_parameters['csv_path']                = basic_parameters['path_to_full_csvs'] + basic_parameters['exchange'] + '/' + basic_parameters['market'] + '/' + basic_parameters['csv_name']
 basic_parameters['data_features']           = 'data/features/'
 basic_parameters['data_calibration']        = 'data/calibration/'
 basic_parameters['results_path']            = 'results/'
-basic_parameters['nlevels']                 = 1 # 20 is the maximum for binance
+basic_parameters['nlevels']                 = 5 # 20 is the maximum for binance
 basic_parameters['lookback_window']         = 10000
 basic_parameters['lookahead_window']        = 1000
 #basic_parameters['drawdown_limit']          = 0.005
 #basic_parameters['fee']                     = 0.04
-basic_parameters['drawdown_limit']          = 0.01 # в просадке скрипт оказывается сразу. Т.к. цена покупки сразу всегда выше текущей (возможной) цены продажи
+basic_parameters['drawdown_limit']          = 1 #0.01 # в просадке скрипт оказывается сразу. Т.к. цена покупки сразу всегда выше текущей (возможной) цены продажи
+basic_parameters['profit']                  = 0.01 # % profit wanted
 basic_parameters['fee']                     = 0
 basic_parameters['trees']                   = 200
 basic_parameters['leafs']                   = 200

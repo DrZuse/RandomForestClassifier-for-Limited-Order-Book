@@ -4,4 +4,3 @@ __pycache__
 *.csv
 !results_TH*.csv
 *.pickle
-results

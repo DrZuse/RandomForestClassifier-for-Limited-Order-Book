@@ -1,4 +1,4 @@
-RandomForestClassifier for predicting the direction of the BTCUSDT crypto pair price. Limited Order Book (LOB) data of varying depth is used to generate labels and features.
+Random Forest Classifier for predicting the direction of the BTCUSDT crypto pair price. Limited Order Book (LOB) data of varying depth is used to generate labels and features.
 
 ## configurations.py
 Contains all the necessary settings and the path to the LOB CSV file.
